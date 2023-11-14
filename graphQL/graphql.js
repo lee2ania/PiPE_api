@@ -1,24 +1,12 @@
 import { ApolloServer, gql } from "apollo-server"; 
 
-const resolver_placeList = [
-    {
-        id: "id 1",
-        country: "country 1",
-        category: "category 1",
-        createdDate: "createdDAte 1",
-        title: "title 1"
-    },
-    {
-        id: "id 2",
-        country: "country 2",
-        category: "category 2",
-        createdDate: "createdDAte 2",
-        title: "title 2"
-    }
-];
-
 const resolvers = {
     Query: {
+        getJobList
+        getJobList(country: String!, category: String!): [Job]
+        getPlaceList(country: String!, category: String!): [Place]
+        getInsuranceList(country: String!, category: String!): [Insurance]
+        getMoneyList(country: String!, category: String!): [Money]
         // moneyList(root, args){
         //     console.log(`age : ${args}`);
         //     return null;
@@ -32,9 +20,50 @@ const resolvers = {
         }
     },
     Mutation : {
-        postMoney() {
+        postMoney : (parent, args, context, info) => {
             return [Money]
+        },
+        postJob : (parent, args, context, info) => {
+
+        },
+        postPlace : (parent, args, context, info) => {
+
+        },
+        postInsurance : (parent, args, context, info) => {
+
+        },
+
+        deleteMoney : (parent, args, context, info) => {
+
+        },
+        deleteJob : (parent, args, context, info) => {
+
+        },
+        deletePlace : (parent, args, context, info) => {
+
+        },
+        deleteInsurance : (parent, args, context, info) => {
+
+        },
+
+        deleteTimePassedPost: (parent, args, context, info) => {
+
+        },
+
+        updateMoney : (parent, args, context, info) => {
+
+        },
+        updateJob : (parent, args, context, info) => {
+
+        },
+        updatePlace : (parent, args, context, info) => {
+
+        },
+        updateInsurance : (parent, args, context, info) => {
+            
         }
+
+
     }
 };
 
@@ -68,7 +97,6 @@ const typeDefs = gql `
         title: String
     }
     type Query {
-        place(title : String) : Place
         getJobList(country: String!, category: String!): [Job]
         getPlaceList(country: String!, category: String!): [Place]
         getInsuranceList(country: String!, category: String!): [Insurance]
@@ -85,10 +113,14 @@ const typeDefs = gql `
         deletePlace(title: String!, id: ID!): Boolean
         deleteInsurance(title: String!, id: ID!): Boolean
 
+        deleteTimePassedPost(today : String!) : [T]
+
         updateMoney(title: String!, id: ID!, country: String!, category: String!) : Money
         updateJob(title: String!, id: ID!, country: String!, category: String!) : Job
         updatePlace(title: String!, id: ID!, country: String!, category: String!) : Place
         updateInsurance(title: String!, id: ID!, country: String!, category: String!) : Insurance
+
+        
 
     }
 
